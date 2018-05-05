@@ -1,0 +1,14 @@
+{
+  "name": "AskCarExpert",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.42",
+    "bcrypt": "^2.0.1",
+    "fibers": "^2.0.2",
+    "meteor-node-stubs": "^0.3.2",
+    "rule-reactor": "^0.1.14"
+  }
+}

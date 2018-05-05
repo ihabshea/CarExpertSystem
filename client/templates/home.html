@@ -1,0 +1,248 @@
+<template name="home">
+  {{#if currentUser}}
+    {{>header}}
+    {{#if sessionCount}}
+
+    {{else}}
+
+    <div id="q1" style="position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+      <div class="col s12 offset-6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Are you married?</span>
+            <p>Why? ...</p>
+          </div>
+          <div class="card-action">
+            <a id="yesMarried">Yes</a>
+            <a id="noMarried">No</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="q2" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+      <div class="col s12 offset-6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">How old are you?</span>
+            <p>Why? ...</p>
+          </div>
+          <div class="card-action">
+            <a id="a1830">Between 18 and 30</a>
+            <a id="a3045">Between 30 and 45</a>
+            <a id="ao45">Older than 45</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="q3" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+      <div class="col s12 offset-6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">How much do you earn in a month?</span>
+            <p>Why? ...</p>
+          </div>
+          <div class="card-action">
+            <a id="sl1">Less than $1K</a>
+            <a id="s12">Between $1K and $2K</a>
+            <a id="sm2">More than $2K</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="q4" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+      <div class="col s12 offset-6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">What is your budget?</span>
+            <p>Why? ...</p>
+          </div>
+          <div class="card-action">
+            <a id="b30">Below $30K</a>
+            <a id="b3050">Between $30K and $50K</a>
+            <a id="b50">More than $50K</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="q5" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+      <div class="col s12 offset-6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">What is your mileage per month?</span>
+            <p>Why? ...</p>
+          </div>
+          <div class="card-action">
+            <a id="l60">Less than 60 Miles</a>
+            <a id="mb60-120">Between 60 and 120 Miles</a>
+            <a id="m120">More than 120 Miles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="suggested-cars" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;">
+      <h4>Initial Suggestions</h4>
+
+
+  <div class="row">
+        {{#each cars}}
+    <div style="float:left; width:50%" class="col">
+      <div class="card">
+        <div class="card-image">
+          <img src="https://www.toyota.com/imgix/responsive/images/mlp/colorizer/2018/camry/3T3/1.png?q=85&fm=jpg&w=1024&fit=max&cs=strip&bg=fff">
+          <span class="card-title">{{make}}</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <p>Automotive class: {{automotive_class}}</p>
+          <p>Car size: {{car_size}}</p>
+          <p>CC: {{cc}}</p>
+        </div>
+      </div>
+    </div>
+
+       {{/each}}
+  </div>
+
+  <button id="proceed" style="width:150px;" class="waves-effect waves-light btn"><i style="margin-left: -130px; margin-right:0px !important;" class="material-icons left"></i>Proceed</button>
+    <button class="waves-effect waves-light btn"><i class="material-icons left">extension</i>Provide Feedback</button>
+ </div>
+ <div id="q6" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+   <div class="col s12 offset-6">
+     <div class="card blue-grey darken-1">
+       <div class="card-content white-text">
+         <span class="card-title">How many children do you have?</span>
+         <p>Why? ...</p>
+       </div>
+       <div class="card-action">
+         <a id="ch0">None</a>
+         <a id="ch1">1</a>
+         <a id="ch2">2</a>
+         <a id="chm2">More than 2</a>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div id="q7" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+   <div class="col s12 offset-6">
+     <div class="card blue-grey darken-1">
+       <div class="card-content white-text">
+         <span class="card-title">Are you against leather?</span>
+         <p>Why? ...</p>
+       </div>
+       <div class="card-action">
+         <a id="lthno">No</a>
+         <a id="lthyes">Yes</a>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div id="q8" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+   <div class="col s12 offset-6">
+     <div class="card blue-grey darken-1">
+       <div class="card-content white-text">
+         <span class="card-title">Do you suffer from any disability?</span>
+         <p>Why? ...</p>
+       </div>
+       <div class="card-action">
+         <a id="disno">No</a>
+         <a id="disyes">Yes</a>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div id="q9" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+   <div class="col s12 offset-6">
+     <div class="card blue-grey darken-1">
+       <div class="card-content white-text">
+         <span class="card-title">Do you live in the suburbs?</span>
+         <p>Why? ...</p>
+       </div>
+       <div class="card-action">
+         <a id="subno">No</a>
+         <a id="subyes">Yes</a>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div id="q10" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+   <div class="col s12 offset-6">
+     <div class="card blue-grey darken-1">
+       <div class="card-content white-text">
+         <span class="card-title">Do you frequently travel accross the country?</span>
+         <p>Why? ...</p>
+       </div>
+       <div class="card-action">
+         <a id="acrossno">No</a>
+         <a id="acrossyes">Yes</a>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div id="q11" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+   <div class="col s12 offset-6">
+     <div class="card blue-grey darken-1">
+       <div class="card-content white-text">
+         <span class="card-title">Do you like camping?</span>
+         <p>Why? ...</p>
+       </div>
+       <div class="card-action">
+         <a id="campno">No</a>
+         <a id="campyes">Yes</a>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div id="q12" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
+   <div class="col s12 offset-6">
+     <div class="card blue-grey darken-1">
+       <div class="card-content white-text">
+         <span class="card-title">In what  part of the world do you live?</span>
+         <p>Why? ...</p>
+       </div>
+       <div class="card-action">
+         <a id="MENA">Africa and MENA</a>
+         <a id="asia">Asia and Australia</a>
+         <a id="europe">Europe</a>
+         <a id="namerica">North America</a>
+         <a id="samerica">South America</a>
+       </div>
+     </div>
+   </div>
+ </div>
+<div style="position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="progress">
+
+    <div class="determinate" style="width: {{progress}}%"></div>
+</div>
+
+
+
+  <!-- Element Showed -->
+  <a id="menu" style="position: fixed; right: 23px; bottom: 23px; padding-top: 0px; margin-bottom: 0; z-index: 997;" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">history</i></a>
+
+  <!-- Tap Target Structure -->
+  <div class="tap-target" data-target="menu">
+    <div class="tap-target-content">
+      <h5>Title</h5>
+      <p>A bunch of text</p>
+    </div>
+  </div>
+
+
+    {{/if}}
+  {{else}}
+    <div style="position: relative;  margin-left: auto;  margin-right: auto;   margin-top:10%; width:50%;" class="row">
+      <div class="col s12 offset-6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Welcome</span>
+            <p>This is an expert system that will help you determine which car is most suitable for your personal needs based on a number of specifically designed questions. <br /> But first, do you want to login or go anonymous?</p>
+          </div>
+          <div class="card-action">
+            <a href="/anonymous">Anonymous</a>
+            <a href="/login">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+</template>
