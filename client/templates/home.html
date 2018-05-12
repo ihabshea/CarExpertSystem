@@ -1,13 +1,26 @@
 <template name="home">
   {{#if currentUser}}
     {{>header}}
-    {{#if sessionCount}}
 
-    {{else}}
+    <div style="position: relative;  margin-left: auto; margin-top:50px;  margin-right: auto; width:50%">
+    <div style="display:none; " id="loading1" class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
 
+      </div>
+    </div>
+  </div>
     <div id="q1" style="position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
       <div class="col s12 offset-6">
-        <div class="card blue-grey darken-1">
+        <div class="card ">
           <div class="card-content white-text">
             <span class="card-title">Are you married?</span>
             <p>Why? ...</p>
@@ -21,7 +34,7 @@
     </div>
     <div id="q2" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
       <div class="col s12 offset-6">
-        <div class="card blue-grey darken-1">
+        <div class="card ">
           <div class="card-content white-text">
             <span class="card-title">How old are you?</span>
             <p>Why? ...</p>
@@ -36,7 +49,7 @@
     </div>
     <div id="q3" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
       <div class="col s12 offset-6">
-        <div class="card blue-grey darken-1">
+        <div class="card ">
           <div class="card-content white-text">
             <span class="card-title">How much do you earn in a month?</span>
             <p>Why? ...</p>
@@ -51,7 +64,7 @@
     </div>
     <div id="q4" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
       <div class="col s12 offset-6">
-        <div class="card blue-grey darken-1">
+        <div class="card ">
           <div class="card-content white-text">
             <span class="card-title">What is your budget?</span>
             <p>Why? ...</p>
@@ -66,7 +79,7 @@
     </div>
     <div id="q5" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
       <div class="col s12 offset-6">
-        <div class="card blue-grey darken-1">
+        <div class="card ">
           <div class="card-content white-text">
             <span class="card-title">What is your mileage per month?</span>
             <p>Why? ...</p>
@@ -84,13 +97,14 @@
 
 
   <div class="row">
+
         {{#each cars}}
     <div style="float:left; width:50%" class="col">
       <div class="card">
         <div class="card-image">
-          <img src="https://www.toyota.com/imgix/responsive/images/mlp/colorizer/2018/camry/3T3/1.png?q=85&fm=jpg&w=1024&fit=max&cs=strip&bg=fff">
+          <img src="{{picture}}">
           <span class="card-title">{{make}}</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">info</i></a>
         </div>
         <div class="card-content">
           <p>Automotive class: {{automotive_class}}</p>
@@ -104,11 +118,20 @@
   </div>
 
   <button id="proceed" style="width:150px;" class="waves-effect waves-light btn"><i style="margin-left: -130px; margin-right:0px !important;" class="material-icons left"></i>Proceed</button>
-    <button class="waves-effect waves-light btn"><i class="material-icons left">extension</i>Provide Feedback</button>
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons left">extension</i>Provide Feedback</a>
+    <div id="modal1" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
  </div>
  <div id="q6" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
    <div class="col s12 offset-6">
-     <div class="card blue-grey darken-1">
+     <div class="card ">
        <div class="card-content white-text">
          <span class="card-title">How many children do you have?</span>
          <p>Why? ...</p>
@@ -124,7 +147,7 @@
  </div>
  <div id="q7" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
    <div class="col s12 offset-6">
-     <div class="card blue-grey darken-1">
+     <div class="card ">
        <div class="card-content white-text">
          <span class="card-title">Are you against leather?</span>
          <p>Why? ...</p>
@@ -138,7 +161,7 @@
  </div>
  <div id="q8" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
    <div class="col s12 offset-6">
-     <div class="card blue-grey darken-1">
+     <div class="card ">
        <div class="card-content white-text">
          <span class="card-title">Do you suffer from any disability?</span>
          <p>Why? ...</p>
@@ -152,7 +175,7 @@
  </div>
  <div id="q9" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
    <div class="col s12 offset-6">
-     <div class="card blue-grey darken-1">
+     <div class="card ">
        <div class="card-content white-text">
          <span class="card-title">Do you live in the suburbs?</span>
          <p>Why? ...</p>
@@ -166,7 +189,7 @@
  </div>
  <div id="q10" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
    <div class="col s12 offset-6">
-     <div class="card blue-grey darken-1">
+     <div class="card ">
        <div class="card-content white-text">
          <span class="card-title">Do you frequently travel accross the country?</span>
          <p>Why? ...</p>
@@ -180,7 +203,7 @@
  </div>
  <div id="q11" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
    <div class="col s12 offset-6">
-     <div class="card blue-grey darken-1">
+     <div class="card ">
        <div class="card-content white-text">
          <span class="card-title">Do you like camping?</span>
          <p>Why? ...</p>
@@ -194,13 +217,13 @@
  </div>
  <div id="q12" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="row">
    <div class="col s12 offset-6">
-     <div class="card blue-grey darken-1">
+     <div class="card ">
        <div class="card-content white-text">
          <span class="card-title">In what  part of the world do you live?</span>
          <p>Why? ...</p>
        </div>
        <div class="card-action">
-         <a id="MENA">Africa and MENA</a>
+         <a id="MENA">Africa and ME</a>
          <a id="asia">Asia and Australia</a>
          <a id="europe">Europe</a>
          <a id="namerica">North America</a>
@@ -208,6 +231,45 @@
        </div>
      </div>
    </div>
+ </div>
+ <div id="suggested-car" style="display:none; position: relative;  margin-left: auto;  margin-right: auto;   width:50%;">
+   <h5>We think this car will fit your needs the most.</h5>
+
+   <div id="loading2" class="preloader-wrapper big active">
+     <div class="spinner-layer spinner-blue-only">
+       <div class="circle-clipper left">
+         <div class="circle"></div>
+       </div>
+       <div class="gap-patch">
+         <div class="circle"></div>
+       </div>
+       <div class="circle-clipper right">
+         <div class="circle"></div>
+       </div>
+     </div>
+   </div>
+     <div class="row">
+           {{#each car}}
+       <div style="float:left; width:50%" class="col">
+         <div class="card">
+           <div class="card-image">
+             <img src="{{picture}}">
+             <span class="card-title">{{make}}</span>
+             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">info</i></a>
+           </div>
+           <div class="card-content">
+             <p>Automotive class: {{automotive_class}}</p>
+             <p>Car size: {{car_size}}</p>
+             <p>CC: {{cc}}</p>
+           </div>
+         </div>
+       </div>
+
+          {{/each}}
+     </div>
+
+   <a class="waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons left">thumb_up</i>Yes?</a>
+<a class="waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons left">thumb_down</i>Nope?</a>
  </div>
 <div style="position: relative;  margin-left: auto;  margin-right: auto;   width:50%;" class="progress">
 
@@ -217,22 +279,25 @@
 
 
   <!-- Element Showed -->
-  <a id="menu" style="position: fixed; right: 23px; bottom: 23px; padding-top: 0px; margin-bottom: 0; z-index: 997;" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">history</i></a>
+  <a href="/history" id="menu" style="position: fixed; right: 23px; bottom: 23px; padding-top: 0px; margin-bottom: 0; z-index: 997;" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">history</i></a>
 
   <!-- Tap Target Structure -->
-  <div class="tap-target" data-target="menu">
-    <div class="tap-target-content">
-      <h5>Title</h5>
-      <p>A bunch of text</p>
-    </div>
-  </div>
+  <div class="tap-target-wrapper open" style="right: -338px; bottom: -327px; position: fixed;"><div class="tap-target cyan" data-target="menu">
+            <div class="tap-target-content white-text" style="width: 456px; height: 400px; top: 0px; right: 0px; bottom: 0px; left: 0px; padding: 56px; vertical-align: bottom;">
+    <i id="closeSuggestion1" class="material-icons" style="float:right;">clear</i>
+              <h5>Try the history</h5>
+
+              <p class="white-text">Improve your experience by exploring previous sessions and the cars we have suggested to you before!</p>
+            </div>
+          </div><div class="tap-target-wave" style="top: 344px; left: 344px; width: 112px; height: 112px;"><a href="/history" class="btn btn-floating btn-large cyan tap-target-origin">
+              <i class="material-icons">history</i>
+            </a></div></div>
 
 
-    {{/if}}
   {{else}}
     <div style="position: relative;  margin-left: auto;  margin-right: auto;   margin-top:10%; width:50%;" class="row">
       <div class="col s12 offset-6">
-        <div class="card blue-grey darken-1">
+        <div class="card ">
           <div class="card-content white-text">
             <span class="card-title">Welcome</span>
             <p>This is an expert system that will help you determine which car is most suitable for your personal needs based on a number of specifically designed questions. <br /> But first, do you want to login or go anonymous?</p>

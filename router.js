@@ -26,6 +26,14 @@ Router.route('/reset-password', function(){
     }
   })
 });
+Router.route('/history', function(){
+  if(this.ready()){
+    this.render('history');
+  }else{
+    this.render('loading');
+  }
+
+});
 Router.route('/settings', function(){
   this.render('settings', {
     data: function(){
@@ -36,7 +44,7 @@ Router.route('/settings', function(){
 Router.route('/admin', function(){
   this.render('admin',   {
     data: function(){
-      
+
     }
   })
 })

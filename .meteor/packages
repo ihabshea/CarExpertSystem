@@ -24,3 +24,5 @@ materialize:materialize
 accounts-password
 insecure
 promise
+meteorhacks:aggregate
+deanius:promise

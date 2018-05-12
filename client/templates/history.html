@@ -1,0 +1,71 @@
+<template name="history">
+  {{>header}}
+  <div id="container">
+  <div class="row">
+    <div class="col s12 m12 l3">
+      <nav class="search-title-filter">
+        <div class="nav-wrapper">
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" required>
+              <label for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+      </nav>
+      <ul    class="collapsible" data-collapsible="expandable">
+        <li class="">
+          <div class="collapsible-header active"><i class="material-icons">event_note</i>Cars</div>
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- Cards container -->
+    <div class="col s12 m12 l9">
+
+      <h4>History</h4>
+      {{#each session}}
+      <div id="card-container" class="row">
+        <!-- Col: Card 1 -->
+        <div style="color:#333 !important;" class="col s12 m12 l4">
+          <!-- Card 1 -->
+          <div class="card">
+            <div class="card-content white-text">
+              <div class="card-image">
+                <img style="" src="{{carPicture}}" />
+                     <span style="color:#000 !important;" class="card-title">{{carMake}}</span>
+              </div>
+              <div class="card__date">
+                <span class="card__date__day">23</span>
+                <span class="card__date__month">Mai</span>
+              </div>
+
+
+              <div class="row card-row">
+                <span class="text-darken-2 card-info"><i class="small material-icons">label</i>{{carAC}}</span>
+              </div>
+              <div class="row card-row">
+                <span class="text-darken-2 card-info"><i class="small material-icons">place</i>&nbsp;{{carAutomation}}</span>
+              </div>
+              <div class="row card-row">
+                <span class="text-darken-2 card-info"><i class="small material-icons">event</i>&nbsp;{{carCC}}</span>
+              </div>
+            </div>
+            <div class="card-action">
+              <a href="#"><i class="material-icons">&nbsp;question_answer</i>Check Answers</a>
+            </div>
+          </div>
+          <!-- End of card -->
+        </div>
+        <!-- End of col -->
+        <!-- Col: Card 1 -->
+
+
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+</template>

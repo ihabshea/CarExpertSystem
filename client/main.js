@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
+import { callWithPromise } from '/imports/client/callWithPromise';
 import './main.html';
 
 answers = []
@@ -8,11 +8,32 @@ answeredCount = 0;
 var answeredDep = new Tracker.Dependency();
 carsArray = []
 var carsArrayDep = new Tracker.Dependency();
+var carDep = new Tracker.Dependency();
+var userDep = new Tracker.Dependency();
 Template.home.rendered = function(){
-  $(document).ready(function(){
-   $('#menu').tapTarget('open');
- });
+    $(document).ready(function(){
+      $('.tap-target').tapTarget("open");
+    });
 }
+Template.settings.rendered = function(){
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+}
+Template.settings.helpers({
+  'user': function(){
+    userDep.depend();
+    return Meteor.users.findOne({_id: Meteor.userId()});
+  }
+});
+Template.settings.events({
+  'click #updateI': function(){
+    first_name = $("first_name").val();
+    last_name = $("last_name").val();
+    Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.name": first_name}});
+    userDep.changed();
+    }
+});
 Template.login.events({
   'click #lgnBtn'(event, instance){
     username =  $("#usernameField").val();
@@ -35,7 +56,9 @@ Template.resetpassword.events({
 })
 Template.home.helpers({
   'sessionCount': function(){
-    count = Sessions.find({'userID': Meteor.userId()}).count();
+    count = Sessions.find({'userid': Meteor.userId()}).count();
+    if(count >0) return true;
+    return false;
   },
   'progress': function(){
       answeredDep.depend();
@@ -44,9 +67,21 @@ Template.home.helpers({
   'cars': function(){
     carsArrayDep.depend();
     return carsArray;
+  },
+  'car': function(){
+    carDep.depend();
+    return carArray;
   }
 })
+Template.history.helpers({
+  'session': function(){
+    return Sessions.find({userid: Meteor.userId()});
+  }
+});
 Template.home.events({
+  'click #closeSuggestion1': function(event){
+    $('.tap-target').tapTarget("close");
+  },
   'click #yesMarried': function(event){
       answeredCount+=1;
       answeredDep.changed();
@@ -124,36 +159,48 @@ Template.home.events({
       $("#q4").fadeOut("fast");
       $("#q5").fadeIn("slow");
   },
-  'click #l60': function(event){
+  'click #l60': async function(event){
       answeredCount+=1;
       answeredDep.changed();
       answers.push("<60");
       $("#q5").fadeOut("fast");
-      Meteor.call("first-try", answers, function(err, res){
+      $("#loading1").css("display","block");
+      await Meteor.callPromise("first-try", answers).then(function(res){
         carsArray = res;
         carsArrayDep.changed();
+        if(res){
+          $("#loading1").css("display","none");
+        }
       });
       $("#suggested-cars").fadeIn("slow");
   },
-  'click #mb60120': function(event){
+  'click #mb60120': async function(event){
       answeredCount+=1;
       answeredDep.changed();
       answers.push("60-120");
       $("#q5").fadeOut("fast");
-      Meteor.call("first-try", answers, function(err, res){
+      $("#loading1").css("display","block");
+      await Meteor.callPromise("first-try", answers).then(function(res){
         carsArray = res;
         carsArrayDep.changed();
+        if(res){
+          $("#loading1").css("display","none");
+        }
       });
       $("#suggested-cars").fadeIn("slow");
   },
-  'click #m120': function(event){
+  'click #m120': async function(event){
       answeredCount+=1;
       answeredDep.changed();
+      $("#loading1").css("display","block");
       answers.push(">120");
       $("#q5").fadeOut("fast");
-      Meteor.call("first-try", answers, function(err, res){
+      await Meteor.callPromise("first-try", answers).then(function(res){
         carsArray = res;
         carsArrayDep.changed();
+        if(res){
+          $("#loading1").css("display","none");
+        }
       });
         $("#suggested-cars").fadeIn("slow");
   },
@@ -259,40 +306,69 @@ Template.home.events({
     $("#q11").fadeOut();
     $("#q12").fadeIn();
   },
-  'click #MENA': function(event){
+  'click #MENA': async function(event){
     answeredCount+=1;
     answeredDep.changed();
     answers.push("MENA");
     $("#q12").fadeOut();
-    //Logic
+    // $("#q5").fadeOut("fast");
+    await Meteor.callPromise("final-dec", answers, Meteor.userId()).then(function(res){
+      // console.log('275');
+      carArray = res;
+      carDep.changed();
+    });
+    $("#suggested-car").fadeIn("slow");
   },
-  'click #asia': function(event){
+  'click #asia': async function(event){
     answeredCount+=1;
     answeredDep.changed();
     answers.push("asia");
-    $("#q10").fadeOut();
+    $("#q12").fadeOut();
     //Logic
+    await Meteor.callPromise("final-dec", answers, Meteor.userId()).then(function(res){
+      // console.log('275');
+      carArray = res;
+      carDep.changed();
+    });
+    $("#suggested-car").fadeIn("slow");
   },
-  'click #europe': function(event){
+  'click #europe': async function(event){
     answeredCount+=1;
     answeredDep.changed();
     answers.push("europe");
-    $("#q11").fadeOut();
+    $("#q12").fadeOut();
     //Logic
+    await Meteor.callPromise("final-dec", answers, Meteor.userId()).then(function(res){
+      // console.log('275');
+      carArray = res;
+      carDep.changed();
+    });
+    $("#suggested-car").fadeIn("slow");
   },
-  'click #namerica': function(event){
+  'click #namerica': async function(event){
     answeredCount+=1;
     answeredDep.changed();
     answers.push("namerica");
-    $("#q11").fadeOut();
-    //Logic
+    $("#q12").fadeOut();
+    await Meteor.callPromise("final-dec", answers, Meteor.userId()).then(function(res){
+      // console.log('275');
+      carArray = res;
+      carDep.changed();
+    });
+        $("#suggested-car").fadeIn("slow");
   },
-  'click #samerica': function(event){
+  'click #samerica': async function(event){
     answeredCount+=1;
     answeredDep.changed();
     answers.push("samerica");
-    $("#q11").fadeOut();
+    $("#q12").fadeOut();
     //Logic
+    await Meteor.callPromise("final-dec", answers, Meteor.userId()).then(function(res){
+      // console.log('275');
+      carArray = res;
+      carDep.changed();
+    });
+    $("#suggested-car").fadeIn("slow");
   }
 });
 Template.header.events({

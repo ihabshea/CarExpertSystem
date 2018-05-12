@@ -1,3 +1,30 @@
 <template name="settings">
+{{>header}}
+
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>General</div>
+      <div class="collapsible-body">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="Placeholder" id="first_name" value="{{user.profile.firstname}}" type="text" class="validate">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" value="{{user.profile.firstname}}" class="validate">
+              <label for="last_name">Last Name</label>
+            </div>
+          </div>
+          <a id="updateI" class="waves-effect waves-light btn">Update</a>
+        </form>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Privacy</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+
+  </ul>
 
 </template>
